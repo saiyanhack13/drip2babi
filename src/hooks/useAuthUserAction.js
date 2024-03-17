@@ -112,6 +112,41 @@ function useAuthUserAction(token) {
     }
   }
 
+  async function handleUpdateNumber(event, profile) {
+    event.preventDefault(); // Empêche le rechargement de la page
+
+    // Récupération du nouveau numéro à partir de l'événement ou d'une autre source
+    const newNumber = event.target.value;
+
+    try {
+      // Simule une requête réseau pour mettre à jour le numéro dans la base de données
+      // Remplacez cette partie par votre propre logique de mise à jour
+      const response = await fetch("/api/update-number", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: profile.userId,
+          newNumber: newNumber,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Erreur lors de la mise à jour du numéro");
+      }
+
+      // Mise à jour du profil local après une mise à jour réussie
+      profile.number = newNumber;
+
+      // Affichage d'un message de succès ou de mise à jour de l'interface utilisateur
+      console.log("Numéro mis à jour avec succès");
+    } catch (error) {
+      // Gestion des erreurs
+      console.error("Erreur lors de la mise à jour du numéro:", error);
+    }
+  }
+
   async function handleEditPassword(event, credential, setCredential) {
     event.preventDefault();
     setPwLoading(true);
@@ -165,6 +200,7 @@ function useAuthUserAction(token) {
     error,
     handleSubmit,
     handleUpdateUser,
+    handleUpdateNumber,
     handleEditPassword,
     pwLoading,
     pwValidate,

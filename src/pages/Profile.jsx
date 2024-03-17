@@ -6,6 +6,7 @@ const Profile = ({ token, user }) => {
 
   const [profile, setProfile] = useState({
     username: user.account.username,
+    number: user.number,
     avatar: avatarPic ? avatarPic : "/icons/account.svg",
     newsletter: user.newsletter,
   });
@@ -35,6 +36,7 @@ const Profile = ({ token, user }) => {
     success,
     error,
     handleUpdateUser,
+    handleUpdateNumber,
     handleEditPassword,
     pwLoading,
     pwValidate,
@@ -49,6 +51,7 @@ const Profile = ({ token, user }) => {
           className="profile w-full flex-1 flex gap-3"
           onSubmit={(event) => {
             handleUpdateUser(event, profile);
+            handleUpdateNumber(event, profile);
           }}
         >
           <div className="flex-1">
@@ -78,6 +81,17 @@ const Profile = ({ token, user }) => {
                 onChange={handleChange}
                 value={profile.username}
                 placeholder="Nom d'utilisateur"
+              />
+            </label>
+            <label htmlFor="number">
+              Numero Whatsapp
+              <input
+                className="inputField border-2 border-zinc-300"
+                id="number"
+                type="string"
+                onChange={handleChange}
+                value={profile.number}
+                placeholder="Numero Whatsapp"
               />
             </label>
             <label

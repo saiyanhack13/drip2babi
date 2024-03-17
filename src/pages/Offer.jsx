@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import LoadPage from "../components/LoadPage";
 
 const Offer = () => {
@@ -16,15 +16,35 @@ const Offer = () => {
         );
         const data = await response.json();
         if (response.ok) {
-          setPageData(data);
+          setPageData((prevData) => ({ ...prevData, ...data }));
           setLoading(false);
         }
       } catch (err) {
         console.error(err);
       }
     }
+
+    async function fetchUserNum() {
+      try {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/user`);
+        const data = await response.json();
+        if (response.ok) {
+          setPageData((prevData) => ({
+            ...prevData,
+            user_number: data.number,
+          }));
+          setLoading(false);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
     fetchOfferData();
+    fetchUserNum();
   }, [id]);
+
+  console.log(pageData);
 
   const {
     product_pictures,
@@ -34,6 +54,8 @@ const Offer = () => {
     product_description,
     owner,
   } = pageData;
+
+  //console.log(owner);
 
   if (isLoading) return <LoadPage />;
 
@@ -93,15 +115,19 @@ const Offer = () => {
               <span>{owner.account.username}</span>
             </div>
           </div>
-          <Link
-            to="/payment"
-            state={{ title: product_name, price: product_price }}
+          <a
+            href={`https://wa.me/${owner.number.replace(
+              "+",
+              ""
+            )}?text=Bonjour, je suis intéressé par votre article ${product_name} sur <ShoptonDrip>`}
+            target="_blank"
+            rel="noopener noreferrer"
             className="w-[80%] mx-auto"
           >
             <button className="w-full bg-[#77B5FE] text-slate-50 h-10 mt-8 mb-4 mx-auto">
               Acheter
             </button>
-          </Link>
+          </a>
         </div>
       </article>
     </>

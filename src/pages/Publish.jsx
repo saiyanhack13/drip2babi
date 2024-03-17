@@ -141,7 +141,7 @@ const Publish = ({ token }) => {
             id="city"
             inputValue={publishForm.city}
             handleChange={handleChange}
-            placeholder="ex: Paris"
+            placeholder="ex: Abidjan, Yopougon || Abidjan, Cocody"
           >
             Lieu
           </InputForm>
