@@ -30,13 +30,35 @@ const Profile = ({ token, user }) => {
     });
   }
 
+  const [newPhoneNumber, setNewPhoneNumber] = useState("");
+
+  const updatePhone = async (newPhoneNumber) => {
+    try {
+      const response = await fetch("/api/user/update-phone", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ number: newPhoneNumber }),
+      });
+      const data = await response.json();
+      if (data.success) {
+        alert("Numéro de téléphone mis à jour avec succès");
+      } else {
+        alert("Erreur lors de la mise à jour du numéro de téléphone");
+      }
+    } catch (error) {
+      console.error(
+        "Erreur lors de la mise à jour du numéro de téléphone:",
+        error
+      );
+    }
+  };
+
   // custom hook
   const {
     loading,
     success,
     error,
     handleUpdateUser,
-    handleUpdateNumber,
     handleEditPassword,
     pwLoading,
     pwValidate,
@@ -49,9 +71,17 @@ const Profile = ({ token, user }) => {
       <div className="flex flex-col gap-4 justify-center items-center w-[85%] h-full sm:max-w-[600px] mx-auto">
         <form
           className="profile w-full flex-1 flex gap-3"
-          onSubmit={(event) => {
-            handleUpdateUser(event, profile);
-            handleUpdateNumber(event, profile);
+          onSubmit={async (event) => {
+            event.preventDefault();
+            try {
+              await handleUpdateUser(event, profile);
+              await updatePhone(newPhoneNumber); // Appeler avec newPhoneNumber seulement
+            } catch (error) {
+              console.error(
+                "Erreur lors de la mise à jour du profil ou du numéro de téléphone:",
+                error
+              );
+            }
           }}
         >
           <div className="flex-1">
@@ -89,8 +119,8 @@ const Profile = ({ token, user }) => {
                 className="inputField border-2 border-zinc-300"
                 id="number"
                 type="string"
-                onChange={handleChange}
-                value={profile.number}
+                onChange={(e) => setNewPhoneNumber(e.target.value)}
+                value={newPhoneNumber}
                 placeholder="Numero Whatsapp"
               />
             </label>

@@ -5,9 +5,11 @@ const Navbar = ({ token, handleToken, setSearch, user }) => {
 
   return (
     <nav className="container flex justify-between items-center gap-4 py-1">
-      <Link to="/">
-        <img src="/images/logo1.png" alt="vinted logo" />
-      </Link>
+      <div>
+        <Link to="/">
+          <img src="/images/logo1.png" alt="vinted logo" />
+        </Link>
+      </div>
 
       <div className="hidden md:block searchbar relative max-w-[550px] grow">
         <input
@@ -43,10 +45,15 @@ const Navbar = ({ token, handleToken, setSearch, user }) => {
         ) : (
           <>
             <Link to="/signup">
-              <button className="mr-3 text-[#77B5FE]">{`S'inscire`}</button>
+              <button
+                className="mr-3 text-[#77B5FE]"
+                id="sins"
+              >{`S'inscire`}</button>
             </Link>
             <Link to="/login">
-              <button className="text-[#77B5FE]">Se connecter</button>
+              <button className="text-[#77B5FE]" id="seco">
+                Se connecter
+              </button>
             </Link>
           </>
         )}

@@ -121,7 +121,7 @@ const Offer = () => {
               ""
             )}?text=Bonjour, je suis intéressé par votre article ${product_name} sur <ShoptonDrip>`}
             target="_blank"
-            rel="noopener noreferrer"
+            rel="noreferrer"
             className="w-[80%] mx-auto"
           >
             <button className="w-full bg-[#77B5FE] text-slate-50 h-10 mt-8 mb-4 mx-auto">
