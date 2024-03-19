@@ -80,10 +80,6 @@ const Offer = () => {
           <div className="w-full flex-auto mb-4">
             <span className="text-2xl">{`${product_price} XOF`}</span>
             {/*a modifier pour voir les articles posté par chaque utilisateur*/}
-            <button className="w-full bg-[#77B5FE] text-slate-50 h-10 mt-8 mb-4 mx-auto">
-              Modifier/Supprimer
-            </button>
-            {/*a modifier pour voir les articles posté par chaque utilisateur*/}
             <ul className="detail flex flex-col text-sm uppercase mt-[10%]">
               {product_details.map((detail) => {
                 const keyName = Object.keys(detail);
