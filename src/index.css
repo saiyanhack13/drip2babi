@@ -70,6 +70,9 @@ h3 {
 .aspect-\[0\.6\/1\] {
   aspect-ratio: 0.8 / 1;
 }
+.mr-3 {
+    margin-right: 0.5rem;
+}
 h4 {
   font-size: 16px;
 }
