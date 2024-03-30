@@ -5,9 +5,9 @@ const HeroReady = () => {
     <>
       <div className="text-2xl  text-center sm:text-left tracking-tight sm:text-2xl sm:tracking-normal">
         <span>
-          Prêts à optimisez vos ventes?
+          Prêts à optimiser vos ventes?
           <br /> ShopTonDrip est entièrement dédié à la vente de vêtements et
-          accessoirs de mode.
+          accessoires de mode.
         </span>
       </div>
       <Link
