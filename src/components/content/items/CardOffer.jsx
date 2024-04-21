@@ -31,8 +31,10 @@ const CardOffer = ({ offer }) => {
             {product_details.map((detail, i) => {
               return (
                 <div key={i} className="text-sm md:text-xs">
-                  {detail["TAILLE"] && <span>{detail["TAILLE"]}</span>}
-                  {detail["MARQUE"] && <span>{detail["MARQUE"]}</span>}
+                  {detail["EMPLACEMENT"] && (
+                    <span>{detail["EMPLACEMENT"]}</span>
+                  )}
+                  {detail["ETAT"] && <span>{detail["ETAT"]}</span>}
                 </div>
               );
             })}

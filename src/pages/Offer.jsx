@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import LoadPage from "../components/LoadPage";
 
 const Offer = () => {
@@ -16,15 +16,35 @@ const Offer = () => {
         );
         const data = await response.json();
         if (response.ok) {
-          setPageData(data);
+          setPageData((prevData) => ({ ...prevData, ...data }));
           setLoading(false);
         }
       } catch (err) {
         console.error(err);
       }
     }
+
+    async function fetchUserNum() {
+      try {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/user`);
+        const data = await response.json();
+        if (response.ok) {
+          setPageData((prevData) => ({
+            ...prevData,
+            user_number: data.number,
+          }));
+          setLoading(false);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
     fetchOfferData();
+    fetchUserNum();
   }, [id]);
+
+  console.log(pageData);
 
   const {
     product_pictures,
@@ -34,6 +54,8 @@ const Offer = () => {
     product_description,
     owner,
   } = pageData;
+
+  //console.log(owner);
 
   if (isLoading) return <LoadPage />;
 
@@ -57,11 +79,7 @@ const Offer = () => {
         <div className="flex flex-col justify-between w-[85%] max-w-[27rem] md:w-[45%] h-[90%] p-6 md:p-10 bg-[white]">
           <div className="w-full flex-auto mb-4">
             <span className="text-2xl">{`${product_price} XOF`}</span>
-            {/*a modifier pour voir les articles posté par chaque utilisateur*/}
-            <button className="w-full bg-[#77B5FE] text-slate-50 h-10 mt-8 mb-4 mx-auto">
-              Modifier/Supprimer
-            </button>
-            {/*a modifier pour voir les articles posté par chaque utilisateur*/}
+            {/*a modifier pour voir les products posté par chaque utilisateur*/}
             <ul className="detail flex flex-col text-sm uppercase mt-[10%]">
               {product_details.map((detail) => {
                 const keyName = Object.keys(detail);
@@ -93,15 +111,19 @@ const Offer = () => {
               <span>{owner.account.username}</span>
             </div>
           </div>
-          <Link
-            to="/payment"
-            state={{ title: product_name, price: product_price }}
+          <a
+            href={`https://wa.me/${owner.number.replace(
+              "+",
+              ""
+            )}?text=Salut, je suis intéressé par votre article ${product_name} à ${product_price} sur <ShoptonDrip>`}
+            target="_blank"
+            rel="noreferrer"
             className="w-[80%] mx-auto"
           >
             <button className="w-full bg-[#77B5FE] text-slate-50 h-10 mt-8 mb-4 mx-auto">
               Acheter
             </button>
-          </Link>
+          </a>
         </div>
       </article>
     </>

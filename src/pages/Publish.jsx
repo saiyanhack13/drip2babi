@@ -132,7 +132,7 @@ const Publish = ({ token }) => {
             id="condition"
             inputValue={publishForm.condition}
             handleChange={handleChange}
-            placeholder="ex: neuf avec etiquette"
+            placeholder="ex: neuf, friperie, bon etat"
           >
             Etat
           </InputForm>
@@ -141,7 +141,7 @@ const Publish = ({ token }) => {
             id="city"
             inputValue={publishForm.city}
             handleChange={handleChange}
-            placeholder="ex: Paris"
+            placeholder="Ex: Ville, Commune, Quartier"
           >
             Lieu
           </InputForm>
@@ -152,9 +152,9 @@ const Publish = ({ token }) => {
             id="price"
             inputValue={publishForm.price}
             handleChange={handleChange}
-            placeholder="0.00XOF"
+            placeholder="Ex : 2500"
           >
-            Prix
+            Prix en XOF
           </InputForm>
         </div>
         <div className="h-12">

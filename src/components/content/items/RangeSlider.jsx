@@ -26,7 +26,7 @@ const LabeledTwoThumbs = ({ rtl, setPriceRange }) => {
         justifyContent: "center",
         flexWrap: "wrap",
         width: "45%",
-        maxWidth: "450px",
+        maxWidth: "200px",
         marginLeft: "2rem",
       }}
     >
@@ -46,7 +46,7 @@ const LabeledTwoThumbs = ({ rtl, setPriceRange }) => {
               ...props.style,
               height: "36px",
               display: "flex",
-              width: "100%",
+              width: "80%",
             }}
           >
             <div

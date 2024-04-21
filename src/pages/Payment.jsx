@@ -1,17 +1,17 @@
-import { useState } from "react";
+/*import { useState } from "react";
 import { useLocation, Link } from "react-router-dom";
-import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+//import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 
 const Payment = ({ token, user }) => {
   const location = useLocation();
   //0 = no click yet,   1 = pending,  2 = ok, 3 = error
-  const [paymentStatus, setPaymentStatus] = useState(0);
+  //const [paymentStatus, setPaymentStatus] = useState(0);
   const { title, price } = location.state;
 
-  const stripe = useStripe();
+  /*const stripe = useStripe();
   const elements = useElements();
-
-  async function handleSubmit(event) {
+*/
+/*async function handleSubmit(event) {
     event.preventDefault();
     try {
       setPaymentStatus(1);
@@ -44,11 +44,11 @@ const Payment = ({ token, user }) => {
     } catch (err) {
       setPaymentStatus(3);
       console.error(err);
-    }
-  }
+    }*/
+/* }
 
   return (
-    <div className="w-full h-full mt-[6.5rem] bg-slate-100">
+    /*<div className="w-full h-full mt-[6.5rem] bg-slate-100">
       {paymentStatus === 2 ? (
         <div className="h-[400px] flex flex-col items-center justify-center">
           <h3>Le paiement a ete valide avec succes</h3>
@@ -91,8 +91,8 @@ const Payment = ({ token, user }) => {
           </div>
         </form>
       )}
-    </div>
-  );
+    </div>*/
+/*);
 };
 
-export default Payment;
+export default Payment;*/

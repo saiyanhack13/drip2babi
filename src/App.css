@@ -22,7 +22,7 @@
   padding-right: 0.1rem;
 }
 img[alt="vinted logo"] {
-  padding-right: 0.3rem;
+  padding-right: 0.2rem;
 }
 .gap-4 {
   gap: 0.001rem;
@@ -40,7 +40,7 @@ img[alt="vinted logo"] {
     font-size: 34px;
     height: 220px;
     justify-content: center;
-    padding: 25px;
+    padding: 10px;
     position: absolute;
     top: 75px;
     left: 5%;
@@ -134,6 +134,7 @@ img.w-8.mr-1 {
   cursor: pointer;
   opacity: 0.8;
 }
+
 
 /* Css Modal... */
 

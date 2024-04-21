@@ -1,11 +1,13 @@
 import { useState } from "react";
 import useAuthUserAction from "../hooks/useAuthUserAction";
+import Dashboard from "./Dashboard";
 
-const Profile = ({ token, user }) => {
+const Profile = ({ token, user, userId }) => {
   const avatarPic = user?.account?.avatar?.secure_url;
 
   const [profile, setProfile] = useState({
     username: user.account.username,
+    number: user.number,
     avatar: avatarPic ? avatarPic : "/icons/account.svg",
     newsletter: user.newsletter,
   });
@@ -29,6 +31,32 @@ const Profile = ({ token, user }) => {
     });
   }
 
+  const [newPhoneNumber, setNewPhoneNumber] = useState("");
+
+  const updatePhone = async (newPhoneNumber) => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/user/update-phone`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ number: newPhoneNumber }),
+        }
+      );
+      const data = await response.json();
+      if (data.success) {
+        alert("Numéro de téléphone mis à jour avec succès");
+      } else {
+        alert("Erreur lors de la mise à jour du numéro de téléphone");
+      }
+    } catch (error) {
+      console.error(
+        "Erreur lors de la mise à jour du numéro de téléphone:",
+        error
+      );
+    }
+  };
+
   // custom hook
   const {
     loading,
@@ -42,19 +70,28 @@ const Profile = ({ token, user }) => {
   } = useAuthUserAction(token);
 
   return (
-    <fieldset className="container h-full mt-[8.5rem] mb-16">
-      <legend className="text-4xl mx-auto mb-12">Détail du Profile</legend>
-      <div className="flex flex-col gap-4 justify-center items-center w-[85%] h-full sm:max-w-[600px] mx-auto">
+    <fieldset className="  flex-col h-15 mt-[8.5rem] ml-[-3rem] pl-[-1rem] mb-16">
+      <legend className="text-4xl mx-auto justify-center mr-flex mb-12">Détail du Profile</legend>
+      <div className="flex flex-col gap-4 justify-center items-center ml-[7rem] pl-[-100px] w-[30%] h-full sm:max-w-[600px] mx-auto">
         <form
-          className="profile w-full flex-1 flex gap-3"
-          onSubmit={(event) => {
-            handleUpdateUser(event, profile);
+          className="profile w-full mr-flex ml-flex flex-1 flex gap-3"
+          onSubmit={async (event) => {
+            event.preventDefault();
+            try {
+              await handleUpdateUser(event, profile);
+              await updatePhone(newPhoneNumber); // Appeler avec newPhoneNumber seulement
+            } catch (error) {
+              console.error(
+                "Erreur lors de la mise à jour du profil ou du numéro de téléphone:",
+                error
+              );
+            }
           }}
         >
-          <div className="flex-1">
+          <div className=" max-w-[140px] flex flex-col gap-3 mr-flex ml-flex  ">
             {profile.avatar instanceof File ? (
               <img
-                className="w-52 aspect square my-4"
+                className="   w-52 aspect square my-4"
                 src={URL.createObjectURL(profile.avatar)}
                 alt="avatar"
               />
@@ -67,8 +104,10 @@ const Profile = ({ token, user }) => {
             )}
             <input id="avatar" type="file" onChange={handleChange} />
           </div>
+  
 
-          <div className="flex flex-col gap-4">
+          <div className= "flex flex-col-center w-full gap-4 ml-flex mr-flex ">
+            <div className="flex flex-col">
             <label htmlFor="username">
               Nom utilisateur
               <input
@@ -78,6 +117,17 @@ const Profile = ({ token, user }) => {
                 onChange={handleChange}
                 value={profile.username}
                 placeholder="Nom d'utilisateur"
+              />
+            </label>
+            <label htmlFor="number">
+              Numero Whatsapp
+              <input
+                className="inputField border-2 border-zinc-300"
+                id="number"
+                type="string"
+                onChange={(e) => setNewPhoneNumber(e.target.value)}
+                value={newPhoneNumber}
+                placeholder="Numero Whatsapp"
               />
             </label>
             <label
@@ -100,11 +150,12 @@ const Profile = ({ token, user }) => {
             <button className="bg-[#77B5FE] text-xl text-slate-50 min-h-[40px] mt-2">
               {loading ? "En cours..." : "Mise a jour Profile"}
             </button>
-            {/*a modifier pour voir les articles posté par chaque utilisateur*/}
+            {/*a modifier pour voir les products posté par chaque utilisateur*/}
             <button className="bg-[#77B5FE] text-xl text-slate-50 min-h-[40px] mt-2">
-              {loading ? "En cours..." : "Voir mes articles"}
+              {loading ? "En cours..." : "Voir mes products"}
             </button>
-            {/*a modifier pour voir les articles posté par chaque utilisateur*/}
+            {/*a modifier pour voir les products posté par chaque utilisateur*/}
+
             <div className="h-12">
               {success && (
                 <p className="mt-6 text-teal-500 text-center">{success}</p>
@@ -113,6 +164,8 @@ const Profile = ({ token, user }) => {
                 <p className="mt-6 text-red-500 text-center">{error}</p>
               )}
             </div>
+            </div>
+            
           </div>
         </form>
 
@@ -159,6 +212,11 @@ const Profile = ({ token, user }) => {
             )}
           </div>
         </form>
+        {/* New section for displaying products */}
+        <div>
+          <h1>Profil</h1>
+          <Dashboard token={token} userId={userId} />
+        </div>
       </div>
     </fieldset>
   );

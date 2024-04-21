@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
 
 const HeroReady = () => {
-  return (
+ return (
     <>
-      <div className="text-2xl  text-center sm:text-left tracking-tight sm:text-2xl sm:tracking-normal">
+      <div className="text-xl text-center sm:text-left tracking-tight sm:text-2xl sm:tracking-normal ml-2 overflow-hidden text-overflow-ellipsis whitespace-nowrap">
         <span>
-          Prêts à optimiser vos ventes?
-          <br /> ShopTonDrip est entièrement dédié à la vente de vêtements et
-          accessoires de mode.
+          Prêts à optimisez vos ventes?
+          <br /> ShopTonDrip est entièrement <br/> dédié à la vente de vêtements <br/> et
+          accessoirs de mode.
         </span>
       </div>
       <Link
@@ -19,7 +19,7 @@ const HeroReady = () => {
         </button>
       </Link>
     </>
-  );
+ );
 };
 
 export default HeroReady;

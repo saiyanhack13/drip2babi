@@ -14,14 +14,16 @@
     @apply flex-1 h-full px-4 border-b-2 border-neutral-200 outline-none focus:border-zinc-400;
   }
 
-  button {
-    border: 1px solid #77b5fe;
+  button:not(.bt-deco) {
+    
     border-radius: 5px;
     font-size: 12px;
     height: 30px;
     outline: none;
-    width: 115px;
+    width: auto;
+    padding: 0 10px;
   }
+  
   header input {
     background-color: #f5f6f7;
     border: none;
@@ -48,6 +50,15 @@
   box-sizing: border-box;
 }
 
+.aspect-\[0\.6\/1\] {
+  aspect-ratio: 0.8 / 1;
+}
+.mr-3 {
+  margin-right: 0.5rem;
+}
+#seco {
+  margin-right: 8px;
+}
 html,
 body {
   max-width: 100vw;

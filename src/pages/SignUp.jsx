@@ -6,6 +6,7 @@ const SignUp = ({ handleToken }) => {
   const [signUpForm, setSignUpForm] = useState({
     username: "",
     email: "",
+    number: "+225",
     password: "",
     checkPassword: "",
     newsletter: true,
@@ -39,19 +40,22 @@ const SignUp = ({ handleToken }) => {
       const user = await response.json();
 
       if (response.status === 409) {
-        setErrorMessage(
-          "Cet email est déjà utilisé, veuillez en choisir un autre :)"
-        );
-      } else if (
-        response.status === 400 &&
-        user.message === "Password must be at least 8 characters long"
-      ) {
-        setUnMatch(true);
-        setErrorMessage(
-          "Le mot de passe doit etre au moins 8 characters de longueur"
-        );
+        if (user.error === "Email already exists") {
+          setErrorMessage(
+            "Cet email est déjà utilisé, veuillez en choisir un autre :)"
+          );
+        } else if (user.error === "Phone number already exists") {
+          setErrorMessage("Le numéro de téléphone est déjà enregistré.");
+        }
       } else if (response.status === 400) {
-        setErrorMessage("Veuillez remplir tous les champs :)");
+        if (user.message === "Password must be at least 8 characters long") {
+          setUnMatch(true);
+          setErrorMessage(
+            "Le mot de passe doit etre au moins 8 characters de longueur"
+          );
+        } else {
+          setErrorMessage("Veuillez remplir tous les champs :)");
+        }
       } else if (response.status === 418) {
         setUnMatch(true);
         setErrorMessage("Veuillez insérer un mot de passe identique");
@@ -71,6 +75,8 @@ const SignUp = ({ handleToken }) => {
   return (
     <fieldset className="container h-full mt-[8.5rem] mb-16">
       <legend className="text-2xl mx-auto mb-12">S&apos;inscrire</legend>
+      <br></br>
+      <br></br>
       <form
         className="flex flex-col gap-5 justify-center items-center w-[85%] h-[25rem] sm:max-w-xs mx-auto"
         onSubmit={submitSignup}
@@ -94,6 +100,17 @@ const SignUp = ({ handleToken }) => {
             onChange={handleChange}
             value={signUpForm.email}
             placeholder="Email"
+          />
+        </label>
+
+        <label htmlFor="number">
+          <input
+            className="inputField"
+            id="number"
+            type="String"
+            onChange={handleChange}
+            value={signUpForm.number}
+            placeholder="Numero Whatsapp ex:+2250701999999"
           />
         </label>
 
