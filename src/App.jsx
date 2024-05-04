@@ -17,6 +17,7 @@ import ResetPassword from "./pages/ResetPassword";
 import useSearchDebounce from "./hooks/useSearchDebounce";
 //import Payment from "./pages/Payment";
 import Dashboard from "./pages/Dashboard";
+import EditOffer from "./pages/EditOffer";
 
 function App() {
   const [token, setToken] = useState(Cookies.get("vintedToken" || null));
@@ -37,6 +38,7 @@ function App() {
           });
           if (response.status === 200) {
             const userData = await response.json();
+        
             setUser(userData);
           } else {
             setToken(null);
@@ -91,7 +93,8 @@ function App() {
         <Route element={<PrivateRoutes user={user} token={token} />}>
           <Route path="/publish" element={<Publish token={token} />} />
           <Route path="/user" element={<Profile token={token} user={user} />} />
-          <Route path="/dashboard" element={<Dashboard token={token} />} />
+          <Route path="/dashboard" element={<Dashboard token={token} />}/> 
+          <Route path="/editoffer/:id" element={<EditOffer token={token} />} />
         </Route>
       </Routes>
 

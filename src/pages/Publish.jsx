@@ -163,7 +163,7 @@ const Publish = ({ token }) => {
           )}
           {error && <p className="mt-6 text-red-500 text-center">{error}</p>}
         </div>
-        <button className="bg-[#77B5FE] mx-auto text-slate-50 w-[85%] sm:w-44 h-10 my-10 text-xl sm:text-sm">
+        <button className="bg-black mx-auto text-slate-50 w-[85%] sm:w-44 h-10 my-10 text-xl sm:text-sm">
           {loading ? "En cours..." : "Ajouter"}
         </button>
       </form>

@@ -157,14 +157,14 @@ const SignUp = ({ handleToken }) => {
           </p>
         </label>
 
-        <button className="bg-[#77B5FE] text-xl text-slate-50 min-h-[40px]">
+        <button className="bg-black text-xl text-slate-50 min-h-[40px]">
           {loading ? "En cours..." : `S'inscrire`}
         </button>
         {errorMessage && (
           <p className="text-red-500 text-center">{errorMessage}</p>
         )}
         <Link to="/login">
-          <span className="text-sm text-[#77B5FE]">
+          <span className="text-sm text-black">
             Tu as deja un compte ? connecte-toi!
           </span>
         </Link>

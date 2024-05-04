@@ -57,7 +57,7 @@ const LabeledTwoThumbs = ({ rtl, setPriceRange }) => {
                 borderRadius: "4px",
                 background: getTrackBackground({
                   values,
-                  colors: ["#ccc", "#77B5FE", "#ccc"],
+                  colors: ["#ccc", "black", "#ccc"],
                   min: MIN,
                   max: MAX,
                   rtl,
@@ -77,7 +77,7 @@ const LabeledTwoThumbs = ({ rtl, setPriceRange }) => {
               height: "17px",
               width: "17px",
               borderRadius: "100%",
-              backgroundColor: isDragged ? "#14b8a6" : "#77B5FE",
+              backgroundColor: isDragged ? "#14b8a6" : "black",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
@@ -93,7 +93,7 @@ const LabeledTwoThumbs = ({ rtl, setPriceRange }) => {
                 fontFamily: "Arial,Helvetica Neue,Helvetica,sans-serif",
                 padding: "1px 4px 1px 4px",
                 borderRadius: "4px",
-                backgroundColor: "#77B5FE",
+                backgroundColor: "black",
               }}
             >
               {values[index].toFixed(0)} XOF
@@ -102,7 +102,7 @@ const LabeledTwoThumbs = ({ rtl, setPriceRange }) => {
               style={{
                 height: "16px",
                 width: "5px",
-                backgroundColor: isDragged ? "#14b8a6" : "#77B5FE",
+                backgroundColor: isDragged ? "#14b8a6" : "black",
               }}
             />
           </div>

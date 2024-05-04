@@ -15,8 +15,8 @@ const FilterBar = ({ setSort, setPriceRange }) => {
   return (
     <nav className="fixed w-full pt-2  md:block mt-flex top-[3.5rem] mb-3 z-10   bg-[#fff] border-y border-neutral-200">
       <div className="flex items-center justify-center  whitespace-nowrap h-10 my-1 lg:w-[80%] mx-auto">
-        <span className=" md:block text-sm ml-1 mr-5">Trier par prix</span>
-        <label className="w-11 h-5 rounded-2xl bg-[#77B5FE] flex items-center cursor-pointer">
+        <span className="hidden md:block text-sm ml-1 mr-5">Trier par prix</span>
+        <label className="w-11 h-5 rounded-2xl bg-black flex items-center cursor-pointer">
           <input
             className="hidden "
             type="checkbox"
@@ -28,7 +28,7 @@ const FilterBar = ({ setSort, setPriceRange }) => {
           />
           <div
             className={`${priceSorted ? "translate-x-0.5" : "translate-x-6"}
-            duration-300 bg-slate-50 ml-[-0.5rem] mr-[-2rem] w-[1.1rem] h-[1.1rem] rounded-full border border-zinc-500 
+            duration-300 bg-slate-50 w-[1.1rem] h-[1.1rem] rounded-full border border-zinc-500 
             flex items-center text-sm justify-center
           `}
           >

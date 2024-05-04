@@ -13,7 +13,7 @@ const CardOffer = ({ offer }) => {
             src={
               owner.account.avatar
                 ? owner.account.avatar.secure_url
-                : "/icons/account.svg"
+                : "/icons/account-icon.svg"
             }
             alt="avatar"
           />
