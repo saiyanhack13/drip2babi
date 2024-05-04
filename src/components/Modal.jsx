@@ -67,7 +67,7 @@ const Modal = ({ setVisible }) => {
                 placeholder="Votre Email"
               />
             </label>
-            <button className="bg-[#77B5FE] text-slate-50 text-xl mt-6">
+            <button className="bg-black text-slate-50 text-xl mt-6">
               {loading ? "En cours..." : "Envoyer"}
             </button>
           </form>
@@ -82,7 +82,7 @@ const Modal = ({ setVisible }) => {
               onClick={() => {
                 setVisible(false);
               }}
-              className="bg-[#77B5FE] text-slate-50 text-xl mt-6"
+              className="bg-black text-slate-50 text-xl mt-6"
             >
               OK
             </button>

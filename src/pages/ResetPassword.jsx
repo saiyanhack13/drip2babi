@@ -123,7 +123,7 @@ const ResetPassword = () => {
           />
         </label>
 
-        <button className="bg-[#77B5FE] text-slate-50 text-xl mt-6">
+        <button className="bg-black text-slate-50 text-xl mt-6">
           {isPending ? "En cours..." : "Envoyer"}
         </button>
 

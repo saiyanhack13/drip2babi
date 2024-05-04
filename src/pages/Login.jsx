@@ -30,6 +30,7 @@ const Login = ({ handleToken, visible, setVisible, token, user }) => {
         setErrorMessage("Veuillez remplir tous les champs :)");
       }
       if (user.token) {
+        localStorage.setItem("user", JSON.stringify(user));  
         handleToken(user.token);
         navigate("/");
       }
@@ -78,7 +79,7 @@ const Login = ({ handleToken, visible, setVisible, token, user }) => {
           />
         </label>
 
-        <button className="bg-[#77B5FE] text-slate-50 text-xl mt-6">
+        <button className="bg-black text-slate-50 text-xl mt-6">
           {loading ? "En cours..." : "Se connecter"}
         </button>
 
@@ -95,7 +96,7 @@ const Login = ({ handleToken, visible, setVisible, token, user }) => {
           <span className="text-sm text-slate-600">Mot de passe oublie ?</span>
         </div>
         <Link to="/signup">
-          <span className="text-sm text-[#77B5FE]">
+          <span className="text-sm text-black">
             Pas encore de compte ? Inscris-toi !
           </span>
         </Link>

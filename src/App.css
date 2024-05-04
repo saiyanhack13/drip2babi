@@ -44,7 +44,7 @@ img[alt="vinted logo"] {
     position: absolute;
     top: 75px;
     left: 5%;
-    width: 360px;
+    width: 385px;
   }
 }
 @media (min-width: 1280px) {
@@ -84,7 +84,7 @@ img.w-8.mr-1 {
 }
 .chevron {
   width: 2.5rem;
-  background-color: #77b5fe;
+  background-color: black;
   display: flex;
   justify-content: center;
   align-items: center;

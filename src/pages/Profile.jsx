@@ -1,6 +1,5 @@
 import { useState } from "react";
 import useAuthUserAction from "../hooks/useAuthUserAction";
-import Dashboard from "./Dashboard";
 
 const Profile = ({ token, user, userId }) => {
   const avatarPic = user?.account?.avatar?.secure_url;
@@ -8,7 +7,7 @@ const Profile = ({ token, user, userId }) => {
   const [profile, setProfile] = useState({
     username: user.account.username,
     number: user.number,
-    avatar: avatarPic ? avatarPic : "/icons/account.svg",
+    avatar: avatarPic ? avatarPic : "/icons/account-icont.svg",
     newsletter: user.newsletter,
   });
   const [credential, setCredential] = useState({
@@ -70,9 +69,9 @@ const Profile = ({ token, user, userId }) => {
   } = useAuthUserAction(token);
 
   return (
-    <fieldset className="  flex-col h-15 mt-[8.5rem] ml-[-3rem] pl-[-1rem] mb-16">
+    <fieldset className=" ml-[-5rem] mr-[5rem] flex-col h-15 mt-[8.5rem]  pl-[-3rem] mb-16">
       <legend className="text-4xl mx-auto justify-center mr-flex mb-12">Détail du Profile</legend>
-      <div className="flex flex-col gap-4 justify-center items-center ml-[7rem] pl-[-100px] w-[30%] h-full sm:max-w-[600px] mx-auto">
+      <div className="flex flex-col gap-4 justify-center items-center w-[30%] h-full sm:max-w-[600px] mx-auto">
         <form
           className="profile w-full mr-flex ml-flex flex-1 flex gap-3"
           onSubmit={async (event) => {
@@ -98,7 +97,7 @@ const Profile = ({ token, user, userId }) => {
             ) : (
               <img
                 className="w-52 aspect square my-4"
-                src={avatarPic ? avatarPic : "/icons/account.svg"}
+                src={avatarPic ? avatarPic : "/icons/account-icon.svg"}
                 alt="avatar"
               />
             )}
@@ -147,11 +146,11 @@ const Profile = ({ token, user, userId }) => {
                 </span>
               </div>
             </label>
-            <button className="bg-[#77B5FE] text-xl text-slate-50 min-h-[40px] mt-2">
+            <button className="bg-black text-xl text-slate-50 min-h-[40px] mt-2">
               {loading ? "En cours..." : "Mise a jour Profile"}
             </button>
             {/*a modifier pour voir les products posté par chaque utilisateur*/}
-            <button className="bg-[#77B5FE] text-xl text-slate-50 min-h-[40px] mt-2">
+            <button className="bg-black text-xl text-slate-50 min-h-[40px] mt-2">
               {loading ? "En cours..." : "Voir mes products"}
             </button>
             {/*a modifier pour voir les products posté par chaque utilisateur*/}
@@ -200,7 +199,7 @@ const Profile = ({ token, user, userId }) => {
               placeholder="Nouveau Mot de passe"
             />
           </label>
-          <button className="bg-[#77B5FE] text-xl text-slate-50 min-h-[40px] mt-4">
+          <button className="bg-black text-xl text-slate-50 min-h-[40px] mt-4">
             {pwLoading ? "En cours..." : "Mise a jour Mot de passe"}
           </button>
           <div className="h-12">
@@ -212,11 +211,7 @@ const Profile = ({ token, user, userId }) => {
             )}
           </div>
         </form>
-        {/* New section for displaying products */}
-        <div>
-          <h1>Profil</h1>
-          <Dashboard token={token} userId={userId} />
-        </div>
+        
       </div>
     </fieldset>
   );

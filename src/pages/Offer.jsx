@@ -104,7 +104,7 @@ const Offer = () => {
                 src={
                   owner.account.avatar
                     ? owner.account.avatar.secure_url
-                    : "/icons/account.svg"
+                    : "/icons/account-icon.svg"
                 }
                 alt="avatar"
               />
@@ -120,7 +120,7 @@ const Offer = () => {
             rel="noreferrer"
             className="w-[80%] mx-auto"
           >
-            <button className="w-full bg-[#77B5FE] text-slate-50 h-10 mt-8 mb-4 mx-auto">
+            <button className="w-full bg-black text-slate-50 h-10 mt-8 mb-4 mx-auto">
               Acheter
             </button>
           </a>

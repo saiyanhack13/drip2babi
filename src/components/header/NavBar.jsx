@@ -6,7 +6,6 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
 
 const Navbar = ({ token, handleToken, setSearch, user }) => {
   const avatar = user?.account?.avatar?.secure_url;
-  const [showSearch, setShowSearch] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   // Fonction pour fermer le menu
@@ -56,24 +55,11 @@ const Navbar = ({ token, handleToken, setSearch, user }) => {
 
       {/* Barre de recherche conditionnelle pour les petits écrans */}
       <div className="flex">
-      {showSearch && (
-        <div className="md:hidden searchbar relative max-w-[113px] ml-1">
-          <div className="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-2 pointer-events-none">
-                <Search className="w-3 h-3 text-gray-500 dark:text-gray-400" />
-            </div>
-          <input
-            type="text"
-            placeholder="Recherche des products"
-            onChange={(e) => {
-              setSearch(e.target.value);
-            }}
-          />
-        </div>
-      )}
+      
 
       <div className="flex">
       <Link to="/publish">
-        <button className="  bg-[#77B5FE] text-slate-50 border border-[#77B5FE] mr-[0.1rem]">
+        <button className="  bg-black text-slate-50 border border-black mr-[0.1rem]">
           VENDRE
         </button>
       </Link>
@@ -86,7 +72,7 @@ const Navbar = ({ token, handleToken, setSearch, user }) => {
           <DropdownMenuTrigger>
             
               <img
-                src={`${avatar ? avatar : "/icons/account.svg"}`}
+                src={`${avatar ? avatar : "/icons/account-icon.svg"}`}
                 alt="user icon"
                 width={200}
                 height={200}
@@ -97,19 +83,20 @@ const Navbar = ({ token, handleToken, setSearch, user }) => {
             <DropdownMenuLabel className="items-center"><span className="text-black">{user?.account?.username}</span></DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem onSelect={closeMenu}>
-              <Link to="#" className="flex items-center space-x-2 text-[#77B5FE]">
+              <Link to="/dashboard" className="flex items-center space-x-2 text-black">
                 <LayoutDashboard className="mr-2 h-4 w-4" />
                 <span>Mes Produits</span>
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem onSelect={closeMenu}>
-              <Link to="/user" className="flex items-center space-x-2 text-[#77B5FE]">
+              <Link to="/user" className="flex items-center space-x-2 text-black">
                 <Settings className="mr-2 h-4 w-4" />
                 <span>Edit Profile</span>
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <button className="flex bt-deco items-center space-x-2 text-[#77B5FE]" onClick={() => {
+              <button className="flex bt-deco items-center space-x-2 text-black" onClick={() => {
+                localStorage.removeItem("user");
                 handleToken(null);
               }}>
                 <LogOut className="mr-2 h-4 w-4" />
@@ -123,7 +110,7 @@ const Navbar = ({ token, handleToken, setSearch, user }) => {
           <>
             <Link to="/signup">
               <button
-                className="ml-1 text-[#77B5FE] border border-[#77B5FE] w-[100%] mr-[-5px]"
+                className="ml-1 text-black border border-black w-[100%] mr-[-5px]"
                 
               >{`S'inscire`}</button>
             </Link>
