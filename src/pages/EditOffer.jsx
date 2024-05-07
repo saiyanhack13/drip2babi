@@ -60,6 +60,7 @@ const EditOffer = ({ token }) => {
     fetchOfferDetails();
   }, []);
 
+
   function handleChange(event) {
     const { id, value } = event.target;
     console.log(id, value);
@@ -91,6 +92,8 @@ const EditOffer = ({ token }) => {
 
   // custom hook
   const { loading, error, success, handleUpdate } = useAuthUserAction(token);
+
+
   return (
     <fieldset className="mt-[6.5rem] w-full h-full flex">
       <legend className="mx-auto">
@@ -101,6 +104,7 @@ const EditOffer = ({ token }) => {
         className="container flex flex-col"
         onSubmit={(event) => {
           handleUpdate(event, editForm, id, resetForm);
+
         }}
       >
         <DropFileInput
@@ -196,6 +200,7 @@ const EditOffer = ({ token }) => {
           <InputForm
             id="product_price"
             inputValue={editForm?.product_price}
+
             handleChange={handleChange}
             placeholder="Ex : 2500"
           >

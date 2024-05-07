@@ -7,6 +7,7 @@ const Dashboard = ({ token, userId }) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+
     const fetchOffers = async () => {
       if (!token) {
         setError("Vous devez être connecté pour accéder à ce contenu.");
@@ -31,6 +32,7 @@ const Dashboard = ({ token, userId }) => {
             },
           }
         );
+
         if (!response.ok) {
           throw new Error("Erreur de récupération des offres");
         }
@@ -153,6 +155,7 @@ const Dashboard = ({ token, userId }) => {
       </div>
     </div>
   );
+
 };
 
 export default Dashboard;
