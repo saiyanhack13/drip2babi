@@ -49,6 +49,38 @@ const Dashboard = ({ token, userId }) => {
 
     fetchOffers();
   }, [token, userId]);
+  console.log(token);
+
+  const handleRemoveOffer = async (id) => {
+    try {
+      setLoading(true);
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/offer/delete/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Erreur de la suppression de l'offre");
+      }
+      const data = await response.json();
+      if (data && Array.isArray(data.offers)) {
+        setOffers(
+          offers.filter((offer) => offer._id.toString() !== id.toString())
+        );
+      } else {
+        throw new Error("Aucune offre trouvée pour cet utilisateur.");
+      }
+      setLoading(false);
+    } catch (error) {
+      setError(error.message);
+      setLoading(false);
+    }
+  };
 
   if (loading) return <div>Chargement des offres...</div>;
   if (error) return <div>Erreur : {error}</div>;
@@ -107,6 +139,7 @@ const Dashboard = ({ token, userId }) => {
                     <p> / </p>
                     <a
                       href="#"
+                      onClick={() => handleRemoveOffer(offer._id)}
                       className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                     >
                       Supprimer
