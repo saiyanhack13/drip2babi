@@ -69,6 +69,66 @@ function useAuthUserAction(token) {
     }
   }
 
+  async function handleUpdate(event, publishForm, id, resetForm) {
+    event.preventDefault();
+    setLoading(true);
+    setSuccess(false);
+    setError(null);
+    try {
+      const formData = new FormData();
+      const datasForm = Object.entries(publishForm);
+
+      datasForm.forEach(([key, value]) => {
+        if (key === "picture") {
+          if (Array.isArray(value)) {
+            value.forEach((file) => {
+              formData.append("picture", file);
+            });
+          } else {
+            formData.append("picture", value);
+          }
+        } else {
+          formData.append(key, value);
+        }
+      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/offer/update/${id}`,
+        {
+          method: "PUT",
+          // not setting the content-type header with fetch
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: formData,
+        }
+      );
+      const data = await response.json();
+
+      if (response.status === 201) {
+        // reset the form if success
+        resetForm();
+        setSuccess("Votre article a été publié avec succes");
+      }
+      if (
+        response.status === 400 &&
+        data.message === "Price must be greater than 500 and not exceed 30000"
+      ) {
+        setError("Le prix doit etre un nombre compris entre 500 et 30000 XOF");
+      } else if (
+        response.status === 400 &&
+        data.message === "Only images files are allowed"
+      ) {
+        setError("Seul les fichiers de type Images sont acceptes");
+      } else if (response.status === 400) {
+        setError("Veuillez remplir tous les champs :)");
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   async function handleUpdateUser(event, profile) {
     event.preventDefault();
     setLoading(true);
@@ -199,6 +259,7 @@ function useAuthUserAction(token) {
     success,
     error,
     handleSubmit,
+    handleUpdate,
     handleUpdateUser,
     handleUpdateNumber,
     handleEditPassword,
