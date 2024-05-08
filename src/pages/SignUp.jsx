@@ -152,7 +152,7 @@ const SignUp = ({ handleToken }) => {
           </div>
           <p className="text-left text-xs text-slate-400 mt-2">
             En m&apos;inscrivant je confirme avoir lu et accepté les Termes &
-            Conditions et Politique de Confidentialité de Vinted. Je confirme
+            Conditions et Politique de Confidentialité de ShopTonDrip. Je confirme
             avoir au moins 18 ans.
           </p>
         </label>
