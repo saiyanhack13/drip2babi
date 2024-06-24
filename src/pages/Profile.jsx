@@ -1,12 +1,11 @@
 import { useState } from "react";
 import useAuthUserAction from "../hooks/useAuthUserAction";
 
-const Profile = ({ token, user, userId }) => {
+const Profile = ({ token, user }) => {
   const avatarPic = user?.account?.avatar?.secure_url;
 
   const [profile, setProfile] = useState({
     username: user.account.username,
-    number: user.number,
     avatar: avatarPic ? avatarPic : "/icons/account-icont.svg",
     newsletter: user.newsletter,
   });
@@ -30,31 +29,7 @@ const Profile = ({ token, user, userId }) => {
     });
   }
 
-  const [newPhoneNumber, setNewPhoneNumber] = useState("");
 
-  const updatePhone = async (newPhoneNumber) => {
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/user/update-phone`,
-        {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ number: newPhoneNumber }),
-        }
-      );
-      const data = await response.json();
-      if (data.success) {
-        alert("Numéro de téléphone mis à jour avec succès");
-      } else {
-        alert("Erreur lors de la mise à jour du numéro de téléphone");
-      }
-    } catch (error) {
-      console.error(
-        "Erreur lors de la mise à jour du numéro de téléphone:",
-        error
-      );
-    }
-  };
 
   // custom hook
   const {
@@ -69,28 +44,19 @@ const Profile = ({ token, user, userId }) => {
   } = useAuthUserAction(token);
 
   return (
-    <fieldset className=" ml-[-5rem] mr-[5rem] flex-col h-15 mt-[8.5rem]  pl-[-3rem] mb-16">
+    <fieldset className=" ml-[-1rem] mr-[5rem] flex-col h-15 mt-[8.5rem]  pl-[-3rem] mb-16">
       <legend className="text-4xl mx-auto justify-center mr-flex mb-12">Détail du Profile</legend>
-      <div className="flex flex-col gap-4 justify-center items-center w-[30%] h-full sm:max-w-[600px] mx-auto">
+      <div className="flex flex-col gap-4 justify-center items-center w-[30%] h-full sm:max-w-justify-center mx-auto">
         <form
           className="profile w-full mr-flex ml-flex flex-1 flex gap-3"
-          onSubmit={async (event) => {
-            event.preventDefault();
-            try {
-              await handleUpdateUser(event, profile);
-              await updatePhone(newPhoneNumber); // Appeler avec newPhoneNumber seulement
-            } catch (error) {
-              console.error(
-                "Erreur lors de la mise à jour du profil ou du numéro de téléphone:",
-                error
-              );
-            }
+          onSubmit={(event) => {
+            handleUpdateUser(event, profile);
           }}
         >
           <div className=" max-w-[140px] flex flex-col gap-3 mr-flex ml-flex  ">
             {profile.avatar instanceof File ? (
               <img
-                className="   w-52 aspect square my-4"
+                className="w-52 aspect square my-4"
                 src={URL.createObjectURL(profile.avatar)}
                 alt="avatar"
               />
@@ -118,17 +84,6 @@ const Profile = ({ token, user, userId }) => {
                 placeholder="Nom d'utilisateur"
               />
             </label>
-            <label htmlFor="number">
-              Numero Whatsapp
-              <input
-                className="inputField border-2 border-zinc-300"
-                id="number"
-                type="string"
-                onChange={(e) => setNewPhoneNumber(e.target.value)}
-                value={newPhoneNumber}
-                placeholder="Numero Whatsapp"
-              />
-            </label>
             <label
               className="text-center flex flex-col items-center justify-center mt-2"
               htmlFor="newsletter"
@@ -147,13 +102,8 @@ const Profile = ({ token, user, userId }) => {
               </div>
             </label>
             <button className="bg-black text-xl text-slate-50 min-h-[40px] mt-2">
-              {loading ? "En cours..." : "Mise a jour Profile"}
+              {loading ? "En cours..." : "Mise a jour"}
             </button>
-            {/*a modifier pour voir les products posté par chaque utilisateur*/}
-            <button className="bg-black text-xl text-slate-50 min-h-[40px] mt-2">
-              {loading ? "En cours..." : "Voir mes products"}
-            </button>
-            {/*a modifier pour voir les products posté par chaque utilisateur*/}
 
             <div className="h-12">
               {success && (
@@ -200,7 +150,7 @@ const Profile = ({ token, user, userId }) => {
             />
           </label>
           <button className="bg-black text-xl text-slate-50 min-h-[40px] mt-4">
-            {pwLoading ? "En cours..." : "Mise a jour Mot de passe"}
+            {pwLoading ? "En cours..." : "Changer"}
           </button>
           <div className="h-12">
             {pwValidate && (

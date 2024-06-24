@@ -91,7 +91,7 @@ const Navbar = ({ token, handleToken, setSearch, user }) => {
             <DropdownMenuItem onSelect={closeMenu}>
               <Link to="/user" className="flex items-center space-x-2 text-black">
                 <Settings className="mr-2 h-4 w-4" />
-                <span>Edit Profile</span>
+                <span>Modifier Profil</span>
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
@@ -100,7 +100,7 @@ const Navbar = ({ token, handleToken, setSearch, user }) => {
                 handleToken(null);
               }}>
                 <LogOut className="mr-2 h-4 w-4" />
-                <span>Se deconnecter</span>
+                <span>DECONNEXION</span>
               </button>
             </DropdownMenuItem>
           </DropdownMenuContent>

@@ -111,11 +111,12 @@ const Offer = () => {
               <span>{owner.account.username}</span>
             </div>
           </div>
+          <div className=" items-center ml-[30%]">
           <a
             href={`https://wa.me/${owner.number.replace(
               "+",
               ""
-            )}?text=Salut, je suis intéressé par votre article ${product_name} à ${product_price} sur <ShoptonDrip>`}
+            )}?text=Salut, je suis intéressé par votre article ${product_name} à ${product_price} sur <https://shoptondrip.com>`}
             target="_blank"
             rel="noreferrer"
             className="w-[80%] mx-auto"
@@ -124,6 +125,7 @@ const Offer = () => {
               Acheter
             </button>
           </a>
+          </div>
         </div>
       </article>
     </>

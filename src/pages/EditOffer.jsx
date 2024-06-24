@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 const EditOffer = ({ token }) => {
   const [editForm, setEditForm] = useState({
     picture: [],
-    title: "",
+    product_name: "",
     description: "",
     brand: "",
     size: "",
@@ -39,16 +39,16 @@ const EditOffer = ({ token }) => {
         const data = await response.json();
 
         setEditForm({
-          title: data.product_name,
+          product_name: data.product_name,
           description: data.product_description,
-          price: data.product_price,
+          product_price: data.product_price,
           category: data.product_details[0]?.CATEGORIE,
           brand: data.product_details[1]?.MARQUE,
           size: data.product_details[2]?.TAILLE,
           condition: data.product_details[3]?.ETAT,
           color: data.product_details[4]?.COULEUR,
           city: data.product_details[5]?.EMPLACEMENT,
-          picture: data.picture ? data.picture : [],
+          picture: data.picture ? data.picture : [], // Conserve les photos existantes si présentes
         });
       } catch (error) {
         console.error(
@@ -59,6 +59,7 @@ const EditOffer = ({ token }) => {
     }
     fetchOfferDetails();
   }, []);
+
 
   function handleChange(event) {
     const { id, value } = event.target;
@@ -77,7 +78,7 @@ const EditOffer = ({ token }) => {
   function resetForm() {
     setEditForm({
       picture: [],
-      title: "",
+      product_name: "",
       description: "",
       category: "",
       brand: "",
@@ -92,6 +93,7 @@ const EditOffer = ({ token }) => {
   // custom hook
   const { loading, error, success, handleUpdate } = useAuthUserAction(token);
 
+
   return (
     <fieldset className="mt-[6.5rem] w-full h-full flex">
       <legend className="mx-auto">
@@ -102,6 +104,7 @@ const EditOffer = ({ token }) => {
         className="container flex flex-col"
         onSubmit={(event) => {
           handleUpdate(event, editForm, id, resetForm);
+
         }}
       >
         <DropFileInput
@@ -111,8 +114,8 @@ const EditOffer = ({ token }) => {
 
         <div className="flex flex-col my-8">
           <InputForm
-            id="title"
-            inputValue={editForm?.title}
+            id="product_name"
+            inputValue={editForm?.product_name}
             handleChange={handleChange}
             placeholder="ex: chemise sezame verte"
           >
@@ -128,8 +131,8 @@ const EditOffer = ({ token }) => {
             </label>
             <textarea
               className="publishField resize-none"
-              id="description"
-              value={editForm?.description}
+              id="product_description"
+              value={editForm?.product_description}
               placeholder="ex: portee quelquefois, taille 44"
               rows="6"
               onChange={handleChange}
@@ -195,8 +198,9 @@ const EditOffer = ({ token }) => {
 
         <div className="mt-4">
           <InputForm
-            id="price"
-            inputValue={editForm?.price}
+            id="product_price"
+            inputValue={editForm?.product_price}
+
             handleChange={handleChange}
             placeholder="Ex : 2500"
           >

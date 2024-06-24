@@ -3,13 +3,15 @@ import { Link } from "react-router-dom";
 const HeroReady = () => {
  return (
     <>
-      <div className="text-xl text-center sm:text-left tracking-tight sm:text-2xl sm:tracking-normal ml-1 overflow-hidden text-overflow-ellipsis whitespace-nowrap">
+      <div className="text-xl text-center sm:text-left tracking-tight sm:text-1xl sm:tracking-normal ml-1 overflow-hidden text-overflow-ellipsis whitespace-nowrap">
         <span>
-          Prêts à optimisez vos ventes?
-          <br />ShopTonDrip est une Marketplace<br/> dédiée à la vente de vêtements <br/> et
+          Optimisez vos ventes!
+          <br />Le <b>DRIP</b> à la <b>PORTEE DE TOUS</b>
+          <br /><b>ShopTonDrip</b> est une Marketplace<br/> dédiée à la vente de vêtements <br/> et
           accessoirs de mode.
         </span>
       </div>
+      <div className=" sm:ml-[30%]  justify-center items-center sm:justify-start">
       <Link
         to="/publish"
         className="w-full flex justify-center items-center sm:justify-start"
@@ -18,6 +20,7 @@ const HeroReady = () => {
           Commencer à vendre
         </button>
       </Link>
+      </div>
     </>
  );
 };
