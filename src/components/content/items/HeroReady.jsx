@@ -8,7 +8,7 @@ const HeroReady = () => {
           Optimisez vos ventes!
           <br />Le <b>DRIP</b> à la <b>PORTEE DE TOUS</b>
           <br /><b>ShopTonDrip</b> est une Marketplace<br/> dédiée à la vente de vêtements <br/> et
-          accessoirs de mode.
+          accessoirs de mode (VINTAGE et autres...).
         </span>
       </div>
       <div className=" sm:ml-[30%]  justify-center items-center sm:justify-start">
